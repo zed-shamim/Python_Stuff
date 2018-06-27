@@ -1,21 +1,10 @@
 #!/usr/local/aws/bin/python
 import datetime
 from datetime import timedelta
+from time import sleep
 import boto3
-
-client = boto3.client('ec2')
-snplist = []
-for i in range(3,4):
-  daysreq = "18-05-25"        
-  response = client.describe_snapshots(Filters=[{'Name': 'description', 'Values': [ 'Snapshot from cluster: sandpit Time: %s*'%daysreq]}])
-  snapshotlist = response['Snapshots']
-  for snap in snapshotlist:
-    print snap
-   # snplist.append(snap['Description'])
-  #print len(snplist) 
-  #del snplist [:] 
-
-
-
-#for snap in range(len(snplist)):
-  #print (snplist[snap])   
+for d in range(12,19):
+ ago = datetime.date.today() - timedelta(days=d)
+ daysreq = ago.strftime("%Y-%m-%d")
+ print daysreq
+ sleep(30)
